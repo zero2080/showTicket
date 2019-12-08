@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Advertising">
+	<!-- SQL -->
+	<resultMap type="Advertising" id="AdvertisingResult">
+		<result property="num" column="num" />
+		<result property="category" column="category" />
+		<result property="acnt_id" column="acnt_id" />
+		<result property="name" column="name" />
+		<result property="company" column="conpany" />
+		<result property="ticket_name" column="ticket_name" />
+		<result property="show_mini" column="show_mini" />
+		<result property="ticket_price" column="ticket_price" />
+		<result property="show_time" column="show_time" />
+		<result property="address" column="address" />
+		<result property="address_img" column="address_img" />
+		<result property="main_img_contents" column="main_img_contents" />
+		<result property="sub_img_contents" column="sub_img_contents" />
+		<result property="day_ticket" column="day_ticket" />
+		<result property="day_show_start_time" column="day_show_start_time" />
+		<result property="day_show_end_time" column="day_show_end_time" />
+		<result property="create_date" column="create_data" />
+		<result property="type" column="type" />
+		<result property="open_date" column="open_date" />
+		<result property="del_date" column="del_date" />
+	</resultMap>
+	
+	<select id="getAdvertList" resultMap ="AdvertisingResult">
+		SELECT * FROM Advertising
+	</select>
+
+	<select id="getAdvert" resultType="Advertising">
+		SELECT * FROM Advertising where num=#{num}
+	</select>
+	
+	<insert id="uploadShow" parameterType="Advertising">
+		insert into Advertising(
+							category,
+							acnt_id,
+							name,
+							company,
+							ticket_name,
+							show_mini,
+							ticket_price,
+							show_time,
+							address,
+							address_img,
+							main_img_contents,
+							sub_img_contents,
+							day_ticket,
+							day_show_start_time,
+							day_show_end_time,
+							create_date,
+							open_date,
+							del_date
+							) values (
+								#{category},
+								#{acnt_id},
+								#{name},
+								#{company},
+								#{ticket_name},
+								#{show_mini},
+								#{ticket_price},
+								#{show_time},
+								#{address},
+								#{address_img},
+								#{main_img_contents},
+								'null',
+								#{day_ticket},
+								STR_TO_DATE(#{day_show_start_time},'%H:%i:%S'),
+								STR_TO_DATE(#{day_show_end_time},'%H:%i:%S'),
+								NOW(),
+								STR_TO_DATE(#{open_date},'%Y/%m/%d),
+								STR_TO_DATE(#{del_date},'%Y/%m/%d)
+							)
+	</insert>
+
+
+</mapper>

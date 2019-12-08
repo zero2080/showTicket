@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL -->
+<mapper namespace="Adminaccountprofile">
+	<resultMap type="Adminaccountprofile"
+		id="AdminaccountprofileResult">
+		<result column="num" property="num" />
+		<result column="acnt_id" property="acnt_id" />
+		<result column="business_reg" property="business_reg" />
+		<result column="document" property="document" />
+		<result column="bank" property="bank" />
+		<result column="bank_number" property="bank_number" />
+		<result column="upload_cnt" property="upload_cnt" />
+		<result column="name" property="name" />
+		<result column="acnt_type" property="acnt_type" />
+		<result column="acnt_status" property="acnt_status" />
+		<result column="date" property="date" />
+	</resultMap>
+	<!-- 쿼리문 진행 -->
+
+	<!-- 관리자 로그인 -->
+	<!-- <select id="admin_login" parameterType="String" resultType="Adminaccountprofile"> 
+		SELECT * FROM adminAccountProfile WHERE acnt_id = #{acnt_id} </select> -->
+
+	<!-- 로그인 마지막 접속일 -->
+	<!-- <update id="update_log" parameterType="String"> UPDATE adminAccountProfile 
+		SET DATE = now() where id = #{id} </update> -->
+
+	<!-- 관리자 및 광고주 리스트 . -->
+	<!-- <select id="admin_all" resultMap="Adminaccountprofile">
+		SELECT * FROM
+		AdminAccountProfile
+	</select> -->
+
+	<!-- 관리자 추가 (admin) -->
+	<!-- <insert id="admin_insert" parameterType="Adminaccountprofile"> INSERT 
+		INTO adminAccountProfile( acnt_id, acnt_pw, business_reg, document, bank, 
+		bank_number,upload_cnt, name, acnt_type, acnt_status, date) VALUES( #{acnt_id}, 
+		#{business_reg}, #{document}, #{bank}, #{bank_number}, #{upload_cnt, #{name}, 
+		#{acnt_type}, #{acnt_status}, SYSDATE ) </insert> -->
+
+	<!-- 관리자 정보 -->
+	<!-- <select id="admin_info" parameterType="String" resultType="Adminaccountprofile"> 
+		SELECT * FROM AdminAccountProfile WHERE acnt_id = #{acnt_id} </select> -->
+
+
+	<!-- 관리자정보수정 -->
+	<!-- <update id="admin_modify" parameterType="Adminaccountprofile"> UPDATE 
+		AdminAccountProfile SET acnt_pw = #{acnt_pw}, business_reg = #{business_reg}, 
+		document = #{document}, bank =#{bank}, bank_number = #{bank_number}, name 
+		= #{name}, acnt_type =# {acnt_type}, acnt_status =#{acnt_status} WHERE acnt_id 
+		= #{acnt_id} </update> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

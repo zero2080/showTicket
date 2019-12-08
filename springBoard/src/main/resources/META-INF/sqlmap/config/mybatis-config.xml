@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Member" type="com.spring.board.model.Member"/>
+		<!-- <typeAlias alias="Notice_Faq" type="com.spring.board.model.Notice_Faq"/> -->
+		
+	</typeAliases>
+	<mappers>
+		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
+		<!-- <mapper resource="META-INF/sqlmap/mappers/Notice_Faq.xml"/> -->
+	</mappers>
+</configuration>
