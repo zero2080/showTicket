@@ -8,7 +8,6 @@
 		<result property="acnt_id" column="acnt_id"/>
 		<result property="acnt_pw" column = "acnt_pw"/>
 		<result property="business_reg" column = "business_reg"/>
-		<result property="document" column ="document"/>
 		<result property="bank" column="bank"/>
 		<result property="bank_number" column="bank_number"/>
 		<result property="upload_cnt" column="upload_cnt"/>
@@ -29,8 +28,13 @@
 	
 	<!-- join Member -->
 	<insert id="joinCom" parameterType="Member">
-		INSERT INTO AdminAccountProfile(acnt_id,acnt_pw,business_reg,document,bank,bank_number,name,date) values (
-			#{acnt_id},#{acnt_pw},#{business_reg},#{document},#{bank},#{bank_number},#{name},sysdate()
+		INSERT INTO AdminAccountProfile(acnt_id,acnt_pw,business_reg,bank,bank_number,name,date) values (
+			#{acnt_id},#{acnt_pw},#{business_reg},#{bank},#{bank_number},#{name},sysdate()
 		)
 	</insert>
+	
+	<!-- ID존재하는지 체크 -->
+	<select id="idExist" resultType="int">
+		SELECT count(acnt_id) FROM AdminAccountProfile WHERE ACNT_ID=#{acnt_id}
+	</select>
 </mapper>

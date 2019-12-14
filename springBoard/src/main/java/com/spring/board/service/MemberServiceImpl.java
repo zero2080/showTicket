@@ -6,12 +6,15 @@ import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.board.dao.MemDao;
+import com.spring.board.model.Advertising;
 import com.spring.board.model.Member;
 import com.spring.board.util.URLMaker;
 
@@ -19,6 +22,7 @@ import com.spring.board.util.URLMaker;
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemDao mDao;
+	
 	@Override
 	public List<Member> memberList(){
 		return mDao.memberList();
@@ -29,9 +33,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public boolean joinCom(MultipartHttpServletRequest mRequest, Member member) {
+		HttpSession session = mRequest.getSession();
+		session.setAttribute("idExist",false);
+		
+		if(idExist(member.getAcnt_id())){
+			session.setAttribute("idExist",true);
+			return false;
+		}
 		//파일 저장
-		String uploadPath = mRequest.getRealPath("img/");
-		String backupPath = mRequest.getRealPath("img_back/");
+		String uploadPath = mRequest.getRealPath("/img/")+"\\";
+		String backupPath = mRequest.getRealPath("/img_back/")+"\\";
+		
+		System.out.println(uploadPath+"\n"+backupPath);
 		
 		Iterator<String> params = mRequest.getFileNames();
 		
@@ -42,19 +55,21 @@ public class MemberServiceImpl implements MemberService{
 			
 			MultipartFile mFile = mRequest.getFile(param);
 			mimg = mFile.getOriginalFilename();
+			System.out.println("이미지 이름 : "+mimg);
+			if(mimg==null || mimg.equals("")) {
+				continue;
+			}
 			String imgLink = URLMaker.imgLinkMaker(mRequest.getRequestURL(),mimg);
-			if(mimg!=null && !mimg.equals("")) {
-				if(new File(uploadPath+mimg).exists()) {
-					mimg = System.currentTimeMillis()+"_"+mimg;
-				}
-				try {
-					mFile.transferTo(new File(uploadPath+mimg));
-					System.out.println("serverFile : " + uploadPath+mimg);
-					System.out.println("backupFile : " + backupPath+mimg);
-					filecopy(uploadPath+mimg,backupPath+mimg);
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
+			if(!mimg.equals("noimage.png") && new File(uploadPath+mimg).exists()) {
+				mimg = System.currentTimeMillis()+"_"+mimg;
+			}
+			try {
+				mFile.transferTo(new File(uploadPath+mimg));
+				System.out.println("serverFile : " + uploadPath+mimg);
+				System.out.println("backupFile : " + backupPath+mimg);
+				filecopy(uploadPath+mimg,backupPath+mimg);
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
 			}
 			if(param.equals("biz_reg")) {
 				member.setBusiness_reg(imgLink);
@@ -102,4 +117,7 @@ public class MemberServiceImpl implements MemberService{
 		return isCopy;
 	}
 	
+	private boolean idExist(String acnt_id) {
+		return mDao.idExist(acnt_id);
+	}
 }

@@ -6,9 +6,46 @@
 <mapper namespace="RegDate">
 	<!-- SQL -->
 	<resultMap type="RegDate" id="RegDateResult">
-		
+		<result property="num" column="num" />
+		<result property="manager_id" column="manager_id" />
+		<result property="acnt_type" column="acnt_type" />
+		<result property="reg_title" column="reg_title" />
+		<result property="reg_date" column="reg_date" />
+
+
 	</resultMap>
+
+	<!-- 공연업로드 부분 수정할떄마다 실행시킬 업데이트 로그 . -->
+	<insert id="Reg_Date" parameterType="RegDate">
+
+		INSERT INTO RegDate (
+		manager_id, acnt_type, reg_title, reg_date) VALUES
+		(
+		#{manager_id},
+		#{acnt_type}, #{reg_title},sysdate()
+		)
+	</insert>
 	
+	<!-- 수정 내역을 편하게 볼수있는 리스트단. -->
+	<select id="Reg_date_List" resultMap="RegDatResult">
+		SELECT * FROM
+		RegDate ORDER BY reg_date DESC
+	</select>
+
+
+	<!-- 수정내역 정확하게 보기 위한 디테일단. -->
+	<select id="Reg_date_Details" parameterType="int"
+		resultType="RegDate">
+
+		SELECT *
+		FROM RegDate WHERE num=#{num}
+
+	</select>
+	<!-- 수정내역 검색하기.   -->
+	
+	
+	
+
 
 
 

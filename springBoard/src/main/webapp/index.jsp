@@ -13,14 +13,11 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
 <title>Insert title here</title>
 </head>
 <body>
 
 	<div class="wrap">
-
-
 		<div class="logo">
 
 			<div>
@@ -40,19 +37,15 @@
 		<div class="main_content">
 			<form method="post" id="authForm" action="${conPath }/loginPro.do">
 				<div>
-					<label for="loginId"></label> 
-					<input type="text" id="loginId" name="loginId" placeholder="공연사">
-						<br>
-						<br>
-					<label for="loginPw"></label> 
-					<input type="password" id="loginPw" name="loginPw" placeholder="Password">
+					<label for="loginId"></label> <input type="text" id="loginId"
+						name="loginId" placeholder="공연사"><br><br><label
+						for="loginPw"></label> <input type="password" id="loginPw"
+						name="loginPw" placeholder="Password">
 				</div>
 				<input type="submit" value="로그인" />
 				<div id="text_right">
-					<input type="checkbox" id="keepLogin" name="keepLogin"> 
-					<label for="keepLogin">
-						<span>로그인 상태 유지</span>
-					</label>
+					<input type="checkbox" id="keepLogin" name="keepLogin"> <label
+						for="keepLogin"><span>로그인 상태 유지</span></label>
 				</div>
 			</form>
 

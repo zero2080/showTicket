@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="conPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -30,6 +29,10 @@
 				<form method="post" action="${conPath }/admin_join.do" enctype="multipart/form-data">
 					<div class="cus_left">
 						<H1>공연사 정보 입력</H1>
+							<br>
+							<c:if test="${idExist}">
+								<h2>이미 존재하는 아이디(사업자 등록번호) 입니다.</h2>
+							</c:if>
 							<br>
 						<input type="file" name="biz_reg"> &nbsp;&nbsp;
 						<input type="text" name="acnt_id" placeholder="사업자 번호 = ID ">

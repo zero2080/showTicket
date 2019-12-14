@@ -2,7 +2,6 @@ package com.spring.board;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,19 @@ public class HomeController {
 	
 	HttpSession session = null;
 	@Autowired
-	private MemberService service;
+	private MemberService mService;
 
+	
+	
 	@ModelAttribute("memberList")
 	public List<Member> memberList() {
-		return service.memberList();
+		return mService.memberList();
 	}
 
 	@RequestMapping(value = "home")
 	public String home(Model model) {
 		System.out.println("In homeController");
-		model.addAttribute("member", service.memberList());
+		model.addAttribute("member", mService.memberList());
 		return "home";
 	}
 
@@ -49,12 +50,10 @@ public class HomeController {
 	@RequestMapping(value="admin_join")
 	public String admin_join(Member member, MultipartHttpServletRequest mRequest) {
 		//공연사 등록
+		
 		session = mRequest.getSession();
-		
-		boolean joinResult = service.joinCom(mRequest, member);
-		
+		boolean joinResult = mService.joinCom(mRequest, member);
 		session.setAttribute("joinResult",joinResult);
-		
 		return "redirect:admin_insert.do";
 	}
 	
@@ -70,16 +69,7 @@ public class HomeController {
 		return "admin/admin_modify";
 	}
 
-	@RequestMapping(value = "notice_list")
-	public String notice_list() {
-		System.out.println("notis_fnq 들어옴");
-		return "notis_fnq/notice_list";
-	}
-	@RequestMapping(value = "faq_list")
-	public String faq_list() {
-		System.out.println("notis_fnq 들어옴");
-		return "notis_fnq/faq_list";
-	}
+
 
 	@RequestMapping(value="goIndex")
 	public String goIndex(HttpSession session) {
@@ -94,7 +84,7 @@ public class HomeController {
 		//ID/PW 배포전에 삭제해야함
 		System.out.println(loginId + "/" + loginPw);
 
-		Member mem = service.getMember(loginId);
+		Member mem = mService.getMember(loginId);
 
 		if (mem != null) {
 			if (mem.getAcnt_pw().equals(loginPw)) {
@@ -126,18 +116,4 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value="uploadShowInfo")
-	public String uploadShowInfo() {
-		return "user/uploadShowInfo";
-	}
-	
-	@RequestMapping(value="uploadShow")
-	public String uploadShow(MultipartHttpServletRequest mRequest, Model model) {
-		session = mRequest.getSession();
-		String page = "../../index";
-		
-		
-		return page;
-	}
-		
 }
