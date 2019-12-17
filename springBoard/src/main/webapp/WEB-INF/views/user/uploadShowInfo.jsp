@@ -30,15 +30,15 @@
 			<input type="file" name="detImg" /><br>
 			<input type="file" name="subImg"/><br>
 			<input type="file" name="mainImg"/><br>
-			<input type="text" name="acnt_id" value="${member.acnt_id }" disabled/>
-			<input type="text" name="name" value="${member.name }" disabled/>
+			<input type="text" name="acnt_id" value="${member.acnt_id }" readonly/>
+			<input type="text" name="name" value="${member.name }" readonly/>
 			<input type="text" name="company" required="required"/>
 			<input type="text" name="ticket_name" required="required"/>
-			<input type="number" name="show_mini" required="required"/>
-			<input type="number" name="ticket_price" required="required"/>
-			<input type="number" name="show_time" required="required"/>
+			<input type="number" name="show_mini" max="99999" required="required"/>
+			<input type="number" name="ticket_price" max="99999999" required="required"/>
+			<input type="number" name="show_time" max="99999" required="required"/>
 			<input type="text" name="address" required="required"/>
-			<input type="number" name="day_ticket" required="required"/>
+			<input type="number" name="day_ticket" max="99999999" required="required"/>
 			<input type="text" name="show_start_time" required="required"/>
 			<input type="datetime-local" name="create_date" required="required"/>
 			<input type="date" name="open_date" required="required"/>
